@@ -1,0 +1,2 @@
+*.lua ide do cartographer_ros/configuration files
+*assets_writer.launch ide do cartographer_ros/launch
