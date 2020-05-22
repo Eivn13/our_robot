@@ -17,11 +17,6 @@
 	<node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
 		type="cartographer_occupancy_grid_node"
 		args="-resolution 0.5" />
-
-<!--	<node pkg="tf" type="static_transform_publisher" name="static_tf_pub_base_to_imu" args="0.0 0.0 0.0 0.0 0.0 0.0 base_link base_imu_link 1"/>
-
-	<node pkg="tf" type="static_transform_publisher" name="static_tf_pub_velodyne" args="0.0 0.0 0.0 0.0 0.0 0.0 velodyne velodyne_link 1" />
-
-	<node pkg="tf" type="static_transform_publisher" name="static_tf_pub_velodyne_to_base_imu_link" args="0.0 0.0 0.0 0.0 0.0 0.0 velodyne_link base_link 1"/> -->
+	
 </launch>
 
