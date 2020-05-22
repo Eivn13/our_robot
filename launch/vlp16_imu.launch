@@ -1,0 +1,27 @@
+<launch>
+	<node name="robot_state_publisher" pkg="robot_state_publisher"
+		type="robot_state_publisher" />
+
+        <param name="robot_description"
+                textfile="$(find our_robot)/urdf/vlp16_imu.urdf" />
+	
+	<node name="cartographer_node" pkg="cartographer_ros"
+		type="cartographer_node" args="
+			-configuration_directory $(find cartographer_ros)/configuration_files
+
+			-configuration_basename vlp16_imu.lua"
+		output="screen">
+		<remap from="points2" to="velodyne_points" />
+	</node>
+
+	<node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+		type="cartographer_occupancy_grid_node"
+		args="-resolution 0.5" />
+
+<!--	<node pkg="tf" type="static_transform_publisher" name="static_tf_pub_base_to_imu" args="0.0 0.0 0.0 0.0 0.0 0.0 base_link base_imu_link 1"/>
+
+	<node pkg="tf" type="static_transform_publisher" name="static_tf_pub_velodyne" args="0.0 0.0 0.0 0.0 0.0 0.0 velodyne velodyne_link 1" />
+
+	<node pkg="tf" type="static_transform_publisher" name="static_tf_pub_velodyne_to_base_imu_link" args="0.0 0.0 0.0 0.0 0.0 0.0 velodyne_link base_link 1"/> -->
+</launch>
+

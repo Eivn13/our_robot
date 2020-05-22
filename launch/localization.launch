@@ -1,0 +1,27 @@
+<launch>
+        <node name="robot_state_publisher" pkg="robot_state_publisher"
+                type="robot_state_publisher" />
+
+        <param name="robot_description"
+                textfile="$(find our_robot)/urdf/vlp16_imu.urdf" />
+
+        <param name="use_sim_time" value="false" />
+
+        <include file="$(find razor_imu_9dof)/launch/razor-pub.launch"/>
+
+        <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch"/>
+
+        <node name="cartographer_node" pkg="cartographer_ros"
+                type="cartographer_node" args="
+                        -configuration_directory $(find cartographer_ros)/configuration_files
+
+                        -configuration_basename vlp16_imu.lua
+			-load_state_filename $(arg load_state_filename)"
+                output="screen">
+                <remap from="points2" to="velodyne_points" />
+        </node>
+
+        <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+                type="cartographer_occupancy_grid_node"
+                args="-resolution 0.5" />
+</launch>
